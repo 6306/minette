@@ -1,5 +1,5 @@
 # Rest v2
-Bot base used for primarily for one thing, done in javascript. 
+Bot base used for primarily for one thing, done in javascript. Continuation of this[https://github.com/Stovven/rest] project.  
 
 ## things it can do
 * **Ping**: embed that just shows if its infact alive (ms time todo)
