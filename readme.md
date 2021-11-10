@@ -35,8 +35,7 @@ Bot base used for primarily for one thing, done in javascript. Continuation of [
     "verifyInfo": "123456789123456789", 
     "cleanupVerify": true,
     "serverName": "SERVER NAME",
-    "infoChannel": "123456789123456789",
-    "manualChannel": "123456789123456789",
+    "embedChannel": "123456789123456789",
     "itsOkayChannel": ["123456789123456789"],
     "itsNotOkayUserID": ["123456789123456789"],
     "botChannel": "123456789123456789"
