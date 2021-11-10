@@ -57,8 +57,7 @@ Bot base used for primarily for one thing, done in javascript. Continuation of [
 * **verifyInfo**: info channel to send people there
 * **cleanupVerify**: clean up the verify channel every 30 minutes
 * **serverName**: your server name! used for the welcome message
-* **infoChannel**: used for embedinfo, just to not send it accidentally
-* **manualChannel**: same deal but with embedmanual
+* **embedChannel**: used for embedupdate, channel to update embeds in
 * **itsOkayChannel**: channels to use for the "its okay" game
 * **itsNotOkayUserID**: stupid naming joke, stop someones messages showing up from the "its okay" game
 * **botChannel**: lock special commands to the bot channel (game)
@@ -67,9 +66,7 @@ its possible to rename *verify* to whatever you want if you wish, located at *./
 
 # Embeds
 
-Info and Manual embeds run on two systems
-
-**Info Embed**
+**Embed Setup**
 ```json
 {
     "name" : "here are the very awesome rules",
