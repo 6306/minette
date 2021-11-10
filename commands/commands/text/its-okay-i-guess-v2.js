@@ -122,7 +122,7 @@ module.exports = {
     .setColor('#2F3136')
     .setTitle(`Here's a new random message!`)
     .setDescription(`\n${randomMessageMain[1].content}\n\nI wonder who it is, could it be:\n1️⃣\u2800**${arr[0]}**\n2️⃣\u2800**${arr[1]}**\n3️⃣\u2800**${arr[2]}**\n\n**30 seconds starts now!**`)
-    .setFooter(`Player: ${message.member.user.tag}\nDont want to appear here? Ask a staff member.`)
+    .setFooter(`Player: ${message.member.user.tag}`)
     message.channel.send({embeds: [embed]})
     let userFilter = m => m.author.id === message.author.id
     let userResponse = await message.channel.awaitMessages({filter: userFilter, max: 1, time: 30000, errors: ['time']}).catch(error => {
@@ -149,10 +149,10 @@ module.exports = {
     userGuess = numberChoice
   }
   if (userGuess.toLowerCase() === randomMessageMain[1].author.username.toLowerCase()) {
-    message.channel.send(`<:poger:768658138525728819> The correct answer was **${randomMessageMain[1].author.username}**, you said **${userGuess}**`)
+    message.channel.send(`The correct answer was **${randomMessageMain[1].author.username}**, you said **${userGuess}**`)
     return
   } else {
-    message.channel.send(`<:sadded:811392578200797224> The correct answer was **${randomMessageMain[1].author.username}**, you said **${userGuess}**`)
+    message.channel.send(`The correct answer was **${randomMessageMain[1].author.username}**, you said **${userGuess}**`)
     return
   }
   },
