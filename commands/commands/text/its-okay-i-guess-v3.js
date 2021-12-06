@@ -18,11 +18,11 @@ module.exports = {
     /* 
     fs file logging
     */
-    const logPath = './restgame.log'
+    const logPath = './restGame.log'
 
     try {
       if (!fs.existsSync(logPath)) {
-          fs.writeFile('./restgame.log', "", function(err) {
+          fs.writeFile('./restGame.log', "", function(err) {
               if(err) {
                 console.log(`Problem creating log! ${err}`)
               } else {
@@ -50,42 +50,41 @@ module.exports = {
     let snowflakeGen2 = Discord.SnowflakeUtil.generate(timeSecondMesssage)
     let snowflakeGen3 = Discord.SnowflakeUtil.generate(timeThirdMessage)
 
-    //pick our channel
-    let randomChannel = itsOkayChannel[Math.floor(Math.random() * itsOkayChannel.length)];
-    let fetchedChannel = await client.channels.fetch(`${randomChannel}`)
-    if (!fetchedChannel) return console.log(`The channel ${randomChannel} is invaild, check config again!`)
+    const randomMessages = async (snowflake) =>  {
+      let randomChannel = itsOkayChannel[Math.floor(Math.random() * itsOkayChannel.length)];
+      let fetchedChannel = await client.channels.fetch(`${randomChannel}`)
+      if (!fetchedChannel) return console.log(`The channel ${randomChannel} is invaild, check config again!`)
 
-    let channelMessages = await fetchedChannel.messages.fetch({limit: 8, before: `${snowflakeGen1}`})
-    let filteredMessagesOnce = channelMessages.filter(m => m.author.id !== itsNotOkayUserID.find((id) => id === m.author.id))
-    let filteredMessages = filteredMessagesOnce.filter(m => m.content !== '')
+      let channelMessages = await fetchedChannel.messages.fetch({limit: 8, before: `${snowflake}`})
+      channelMessages = channelMessages.filter(m => m.author.id !== itsNotOkayUserID.find((id) => id === m.author.id))
+      channelMessages = channelMessages.filter(m => m.content !== '')
+      return channelMessages
+    }
 
-    let channelMessages1 = await fetchedChannel.messages.fetch({limit: 8, before: `${snowflakeGen2}`})
-    let filteredMessagesTwice = channelMessages1.filter(m => m.author.id !== itsNotOkayUserID.find((id) => id === m.author.id))
-    let filteredMessages2 = filteredMessagesTwice.filter(m => m.content !== '')
-
-    let channelMessages2 = await fetchedChannel.messages.fetch({limit: 8, before: `${snowflakeGen3}`})
-    let filteredMessagesThrice = channelMessages2.filter(m => m.author.id !== itsNotOkayUserID.find((id) => id === m.author.id))
-    let filteredMessages3 = filteredMessagesThrice.filter(m => m.content !== '')
+    let channelMessages = await randomMessages(snowflakeGen1)
+    let channelMessages2 = await randomMessages(snowflakeGen2)
+    let channelMessages3 = await randomMessages(snowflakeGen3)
 
 
     function getRandomItem(set) {
       let items = Array.from(set);
       return items[Math.floor(Math.random() * items.length)];
   }
-  let randomMessageMain = getRandomItem(filteredMessages)
+
+  let randomMessageMain = getRandomItem(channelMessages)
   let nameArray = [ ]
 
-    filteredMessages2.forEach(msg => {
+    channelMessages2.forEach(msg => {
       nameArray.push(msg.author.username)
     })
-    filteredMessages3.forEach(msg => {
+    channelMessages3.forEach(msg => {
       nameArray.push(msg.author.username)
     })
   
     let cleanNameArray = [...new Set(nameArray)]
-    cleanNameArray.filter(name => name != randomMessageMain[1].author.username)
+    cleanNameArray = cleanNameArray.filter(name => name != randomMessageMain[1].author.username)
     let randomMessageSecond = getRandomItem(cleanNameArray)
-    cleanNameArray.filter(name => name != randomMessageSecond)
+    cleanNameArray = cleanNameArray.filter(name => name != randomMessageSecond)
     let randomMessageThird = getRandomItem(cleanNameArray)
 
     let date = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }).replace(/T/, ' ').replace(/\..+/, '')
