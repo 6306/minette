@@ -23,7 +23,7 @@ A discord.js bot base thing, it works i suppose?
 ```json 
 {
     "token" : "TOKEN GOES HERE",
-    "prefix": "r!",
+    "prefix": "m!",
     "commandErrors": false,
     "reply": false,
     "commandID": ["123456789123456789"],
