@@ -1,18 +1,21 @@
-# Rest v2
-Bot base used for primarily for one thing, done in javascript. Continuation of [this](https://github.com/Stovven/rest) project.  
+# Minette
+A discord.js bot base thing, it works i suppose?
 
 ## things it can do
 * **Ping**: embed that just shows if its infact alive (ms time todo)
-* **Say**: says what it does, talk as the bot. requires userID to be included in *commandID*
+* **Say**: says what it does, talk as the bot. requires userID to be included in *commandID* or *manage messages*
 * **Verify**: verify server members by a command, requires *verifyChannel* and *verifyRole* to work
 * **Response Module**: turned off by default, make it go scream at people if someone says a thing.
-* **game**: remake of "its okay i guess" to fit with discord, now with messages (buggy)
+* **game**: remake of "its okay i guess" to fit with discord, now with messages
+* **blackjack**: its blackjack.
 
 **Requires Manage Messages**
 * **RecordBan, RecordMute, Note, RecordWatchlist**: requires *Manage Messages* role applied to user to work, might hiccup if also not given *Manage Messages* to the bot as it uses it to clean up afterwards. Can be used to record moderation actions.  
+* **Strike**: Counts Strikes against people.
+* **Records**: Lists records of a specific user
 
 **Requires Administrator**
-* **Embedupdate**: produce and update embeds, can be changed in *config/embeds*
+* **EmbedUpdate**: produce and update embeds, can be changed in *config/embeds* 
 
 
 
@@ -27,18 +30,24 @@ Bot base used for primarily for one thing, done in javascript. Continuation of [
     "noDeleteID": ["123456789123456789"],
     "verifyChannel": "123456789123456789",
     "verifyRole": "123456789123456789",
-    "verifyNotice": true,
+    "verifyNotice": false,
     "verifyNoticeChannel": "123456789123456789",
-    "verifyWelcome": true,
+    "verifyWelcome": false,
     "verifyWelcomeChannel": "123456789123456789",
     "verifyPicture": "https://example.com/image.png",
     "verifyInfo": "123456789123456789", 
-    "cleanupVerify": true,
+    "cleanupVerify": false,
     "serverName": "SERVER NAME",
-    "embedChannel": "123456789123456789",
+    "infoChannel": "123456789123456789",
+    "manualChannel": "123456789123456789",
     "itsOkayChannel": ["123456789123456789"],
     "itsNotOkayUserID": ["123456789123456789"],
-    "botChannel": "123456789123456789"
+    "botChannel": "123456789123456789",
+    "autoDm": false,
+    "loggingChannel": "123456789123456789",
+    "usernameLogging": false,
+    "dbConnection": false,
+    "dbLink": "something something mongodb link here"
 }
 ```
 * **Token**: Your bot token, can be accessed at [here](https://discord.com/developers/applications)
@@ -57,59 +66,54 @@ Bot base used for primarily for one thing, done in javascript. Continuation of [
 * **verifyInfo**: info channel to send people there
 * **cleanupVerify**: clean up the verify channel every 30 minutes
 * **serverName**: your server name! used for the welcome message
-* **embedChannel**: used for embedupdate, channel to update embeds in
+* **infoChannel**: used for embedinfo, just to not send it accidentally
+* **manualChannel**: same deal but with embedmanual
 * **itsOkayChannel**: channels to use for the "its okay" game
 * **itsNotOkayUserID**: stupid naming joke, stop someones messages showing up from the "its okay" game
 * **botChannel**: lock special commands to the bot channel (game)
+* **autoDm**: auto dms users to notice the verification
+* **loggingChannel**: channel to log things in (user changes and things of that kind)
+* **usernameLogging**: toggle to log usernames
+* **dbConnection**: Toggle connection to a database, *some commands may not function without one*
+* **dbLink**: Link to your MongoDB database
 
 its possible to rename *verify* to whatever you want if you wish, located at *./commands/commands/text/verify.js*
 
 # Embeds
 
-**Embed Setup**
+Info and Manual embeds run on two systems
+
+**Info Embed**
 ```json
 {
+    "id": 1,
     "name" : "here are the very awesome rules",
     "content" : "1. dont do something?? \n 2. dont do another thing",
     "image": "https://example.com/image.png",
     "color": "#B00B69"
 }   
 ```
+* **Id**: Where you want to place this embed (1st, 2nd, 3rd...)
 * **Name**: the title of your embed
 * **Content**: __**Line breaks will break json formating, use \n to line break!**__ content of your embed
-* **image**: image of your embed
-* **color**: color of your embed
+* **Image**: image of your embed
+* **Color**: color of your embed
+
 
 ## Adding Embeds
-Adding embeds isn't as simple as it seems, isnt *that* hard anyways
+Adding embeds is actually pretty easy now!
 
-In the *commands/management* folder locate the embed command file then at the start add a new line with your json file, remember to rename them if you want to put one in the middle or start.
-```javascript
-// start of embeds
-const embedJSON2 = require('../../../config/embeds/embeds-1.json')
-const embedJSON1 = require('../../../config/embeds/embeds-2.json')
-// end of embeds
-```
-Add a new *MessageEmbed* constructor at in the row of embeds, it wont be like this. just config it to be like the count it was.
-```javascript
-let embed1 = new Discord.MessageEmbed()
-.setTitle(`${embedJSON2.name}`)
-.setDescription(embedJSON2.content)
-.setImage(`${embedJSON2.image}`)
-.setColor(`${embedJSON2.color}`)
-```
-Finally add a new line where the embeds send
-```javascript
-await message.channel.send({embeds: [embed2]})
-```
+Add an embed using the proper documentation above this. Then delete everything in your embed channel. Finally run the embed command to create the new embeds.
+
+
 
 # Running
 
-To run locally, you'll need [node.js](https://nodejs.org/en/) **v16** and *discord.js* installed
+To run locally, you'll need [node.js](https://nodejs.org/en/) **v16** and *discord.js + mongoose* installed
 
-To install discord.js run in cmd in your project folder
+To install all requirements run in cmd in your project folder
 ```cmd
-npm install discord.js
+npm install 
 ```
 
 to run simply just do
@@ -119,4 +123,4 @@ node main.js
 
 ------
 
-*Has known issues about the stupid game command, any other issues make me aware i guess*
+*how does this thing function????*

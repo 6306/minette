@@ -3,7 +3,7 @@ const { verifyChannel, verifyRole, verifyNotice, verifyNoticeChannel, verifyWelc
 
 module.exports = {
   commands: 'verify' ,
-  description: 'N/A',
+  description: 'Verification command',
   maxArgs: 0,
   callback: (message, arguments, text, client) => {
      if(message.channel.id !== verifyChannel) return

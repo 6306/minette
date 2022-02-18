@@ -4,7 +4,7 @@ const { itsOkayChannel, itsNotOkayUserID, botChannel } = require('../../../confi
 
 module.exports = {
   commands: 'game' ,
-  description: 'N/A',
+  description: `A game where you guess who's message that is`,
   callback: async (message, arguments, text, client) => {
     let whq = message.channel.guild
     /*
@@ -14,31 +14,13 @@ module.exports = {
     */
     //bot channel exclusive
     if(message.channel.id !== botChannel) return
-    
-    /* 
-    fs file logging
-    */
-    const logPath = './restGame.log'
-
-    try {
-      if (!fs.existsSync(logPath)) {
-          fs.writeFile('./restGame.log', "", function(err) {
-              if(err) {
-                console.log(`Problem creating log! ${err}`)
-              } else {
-                console.log(`log created!`)
-              }
-          }) 
-      }
-    } catch(err) {
-      console.log(`There was a problem creating a log! ${err}`)
-   }
-
 
     // snowflake time convert
     function randomDate(start, end) {
       return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
     }
+
+    //hi you might be reading this and thinking what the fuck was this guy on when he made these values hardcoded, im sorry lol
       const time = randomDate(new Date(2019, 20, 6), new Date());
       const timeSecondMesssage = randomDate(new Date(2019, 20, 6), new Date());
       const timeThirdMessage = randomDate(new Date(2019, 20, 6), new Date());
@@ -86,21 +68,7 @@ module.exports = {
     let randomMessageSecond = getRandomItem(cleanNameArray)
     cleanNameArray = cleanNameArray.filter(name => name != randomMessageSecond)
     let randomMessageThird = getRandomItem(cleanNameArray)
-
-    let date = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }).replace(/T/, ' ').replace(/\..+/, '')
-    let writeLog = `[${date}] Array: ${nameArray}, Dupe-less: ${cleanNameArray}\n`
-
-    try {
-      fs.appendFile(`${logPath}`, `${writeLog}`, function (err) {
-        if (err) {
-            console.log(`Problem writing to log! ${err}`)
-        } else {
-            //console.log(`Apended to file!`)
-        }
-    })
-    } catch (err) {
-      console.log(`There was a problem writing to log! ${err}`)
-    }
+ 
 
     let arr = [ ]
     arr.push(randomMessageMain[1].author.username)

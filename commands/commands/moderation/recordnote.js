@@ -3,7 +3,7 @@ const { prefix } = require('../../../config/config.json')
 
 module.exports = {
   commands: 'recordnote' ,
-  description: 'N/A',
+  description: 'Record notes with any text in them',
   requiredRoles: [ ],
   permissions: ['MANAGE_MESSAGES'],
   callback: (message, arguments, text, client) => {

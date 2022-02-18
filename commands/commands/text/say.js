@@ -4,9 +4,9 @@ const id = config.commandID
 
 module.exports = {
   commands: 'say' ,
-  description: 'N/A',
+  description: 'Say anything as the bot',
   callback: async (message, arguments, text) => {
-  if(message.author.id === id.find((id) => id === message.author.id)) {
+  if(message.member.permissions.has('MANAGE_MESSAGES') || message.author.id === id.find((id) => id === message.author.id)) {
     message.delete()
     if(arguments.length == 0) return 
     if(!isNaN(arguments[0])) {
@@ -26,7 +26,6 @@ module.exports = {
     let embed = new Discord.MessageEmbed()
     .setColor('#2F3136')
     .setTitle("No")
-    .setDescription(`>:(`)
     message.channel.send({ embeds: [embed]})
   }
   },

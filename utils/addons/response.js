@@ -1,5 +1,5 @@
 const Discord = module.require('discord.js')
-const { reply } = require('../config/config.json')
+const { reply } = require('../../config/config.json')
 
 module.exports = (client) => {
     client.on("messageCreate", (message) => {
@@ -8,8 +8,8 @@ module.exports = (client) => {
         const { content } = message
         const arguments = content.split(/[ ]+/)
         const text = arguments.join(" ").toLowerCase()
-        if(text.match(/something something funny text/))
-            message.channel.send('words')
+        if(text.match(/dumb test message here/))
+            message.channel.send('dumb response message here')
         }
     )
 }

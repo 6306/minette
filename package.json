@@ -1,7 +1,7 @@
 {
-  "name": "rest-discord",
+  "name": "minette-discord",
   "version": "3.0.0",
-  "description": "huh sounds alot like andy",
+  "description": "the fact that it functions is amazing",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,6 +12,7 @@
     "node": "16.x"
   },
   "dependencies": {
-    "discord.js": "^13.1.0"
+    "discord.js": "^13.5.0",
+    "mongoose": "^6.2.0"
   }
 }

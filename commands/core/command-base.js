@@ -42,7 +42,7 @@ const validatePermissions = (permissions) => {
   }
 }
 const allCommands = {}
-  module.exports = (  comamandOptions) => {
+  module.exports = (comamandOptions) => {
     let {
       commands,
       permissions = [],
