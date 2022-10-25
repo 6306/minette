@@ -7,7 +7,7 @@ module.exports = {
   commands: 'records' ,
   description: 'Lists all records',
   requiredRoles: [ ],
-  permissions: ['MANAGE_MESSAGES'],
+  permissions: [Discord.PermissionsBitField.Flags.ManageMessages],
   callback: async (message, arguments, text, client) => {
     if(arguments.length === 0) return message.channel.send(`Missing arguments! Proper usage: \`${prefix}records LIST [USERID] | ${prefix}records DELETE [RECORDID]\``)
     if(arguments.length < 2 || arguments.length > 3) return message.channel.send(`Missing arguments! Proper usage: \`${prefix}records LIST [USERID] | ${prefix}records DELETE [RECORDID]\``)
@@ -24,7 +24,7 @@ module.exports = {
           user: `${userId}`
         })
         if(recordLog.length === 0) {
-          let embed = new Discord.MessageEmbed()
+          let embed = new Discord.EmbedBuilder()
           .setTitle(`${userCheck.username}'s History`)
           .setDescription(`There are no records for this user`)
           message.channel.send({embeds: [embed]})
@@ -36,7 +36,7 @@ module.exports = {
           if(currentRecord.time) recordlist += `\n**Time**: ${currentRecord.time}`
           recordlist += `\n**Offense/Action**: ${currentRecord.offense}\n**Reason**: ${currentRecord.reason}\n**URL**: ${currentRecord.url}\n\n`
         }
-        let embed = new Discord.MessageEmbed()
+        let embed = new Discord.EmbedBuilder()
         .setTitle(`${userCheck.username}'s History`)
         .setDescription(`${recordlist}`)
         message.channel.send({embeds: [embed]})
@@ -57,7 +57,7 @@ module.exports = {
         if(recordLog.time) currentRecord += `\n**Time**: ${recordLog.time}`
         currentRecord += `\n**Offense/Action**: ${recordLog.offense}\n**Reason**: ${recordLog.reason}\n**URL**: ${recordLog.url}`
         currentRecord += `\n\n**This action cannot be reversed!**`
-        let embed = new Discord.MessageEmbed()
+        let embed = new Discord.EmbedBuilder()
         .setTitle(`Delete this record?`)
         .setDescription(currentRecord)
         let finalMessage = await message.channel.send({embeds: [embed]})

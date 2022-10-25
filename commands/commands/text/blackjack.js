@@ -3,8 +3,14 @@ const Discord = module.require('discord.js');
 
 module.exports = {
   commands: ['blackjack', 'bj'] ,
-  description: 'Play a game of shitty blackjack',
+  description: 'Play a game of shitty blackjack with andy',
   callback: async (message, arguments, text) => {
+
+    // TODO: figure out what the actual hell is going on here, no really i hate this
+    return
+
+
+
     if(!message.member.permissions.has("MANAGE_MESSAGES")) {
       if(message.channel.id !== botChannel) return
     }
@@ -25,26 +31,25 @@ module.exports = {
     }
 
     let playerCards = cardGen()  
-    const buttons = new Discord.MessageActionRow()
+    const buttons = new Discord.ActionRowBuilder()
     .addComponents(
-      [new Discord.MessageButton()
+      [new Discord.ButtonBuilder()
       .setCustomId(`hit`)
       .setLabel(`Hit`)
-      .setStyle(`SUCCESS`),
-      new Discord.MessageButton()
+      .setStyle(3),
+      new Discord.ButtonBuilder()
       .setCustomId(`hold`)
       .setLabel(`Hold`)
-      .setStyle(`DANGER`)]
+      .setStyle(4)]
     )
-    let embed = new Discord.MessageEmbed()
+    let embed = new Discord.EmbedBuilder()
     .setColor('#FFFFFF')
-    .setTitle(`Shitty Back Alley Blackjack`)
+    .setTitle(`Andy's Back Alley Blackjack`)
     .setDescription(`**Dealer**: ${dealerCard01} + ??\n\n**You**:${playerCards}`)
-    .setFooter(`Player: ${message.member.user.tag}.`)
+    .setFooter({text: `Player: ${message.member.user.tag}.`})
     let messageSent = await message.channel.send({ embeds: [embed], components: [buttons] })
 
-    let collector = await message.channel.createMessageComponentCollector({filter: userFilter, componentType: `BUTTON`, time: 30000})
-    
+    let collector = await messageSent.createMessageComponentCollector({filter: userFilter, componentType: `BUTTON`, time: 30000})
     let hitGen = (count) => {
       let card01 = Math.floor(Math.random() * 10) + 1
       count = card01 + count
@@ -75,7 +80,7 @@ module.exports = {
        else if(count >= 17) {
         if (count > playerCount) {
           embed.setDescription(`**Dealer**:${count}\n\n**You**:${playerCount}`)
-          messageSent.edit({content: `Dealer wins with a count of ${count}! (${message.author.username}'s count: ${playerCount})`, embeds: [embed], components: [buttons]})
+          messageSent.edit({content: `Andy wins with a count of ${count}! (${message.author.username}'s count: ${playerCount})`, embeds: [embed], components: [buttons]})
           return
         } else {
           embed.setDescription(`**Dealer**:${count}\n\n**You**:${playerCount}`)
@@ -91,9 +96,10 @@ module.exports = {
     }
 
     collector.on('collect', i => {
-      buttons.components[0].setDisabled(true)
-      buttons.components[1].setDisabled(true)
+      Discord.ButtonBuilder.from(buttons.components[0]).setDisabled(true)
+      Discord.ButtonBuilder.from(buttons.components[1]).setDisabled(true)
       messageSent.edit({components: [buttons]})
+      console.log(`we did something!`, i)
       i.deferUpdate()
       if(i.customId === 'hit') {
         playerCards = hitGen(playerCards)
@@ -107,8 +113,8 @@ module.exports = {
     })
 
     collector.on('end', (colected, reason) => {
-      buttons.components[0].setDisabled(true)
-      buttons.components[1].setDisabled(true)
+      Discord.ButtonBuilder.from(buttons.components[0]).setDisabled(true)
+      Discord.ButtonBuilder.from(buttons.components[1]).setDisabled(true)
       if(reason === 'hold') {
         return dealerGen(dealerCards, playerCards)
       } else if(reason === 'bust') {

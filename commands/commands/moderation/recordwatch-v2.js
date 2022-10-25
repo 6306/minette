@@ -4,16 +4,15 @@ const recordSchema = module.require(`../../../config/schemas/records-schema.js`)
 
 module.exports = {
   commands: 'recordwatch' ,
-  description: 'Records Records people placed in the watchlist',
+  description: 'Records people placed in the watchlist',
   requiredRoles: [ ],
-  permissions: ['MANAGE_MESSAGES'],
+  permissions: [Discord.PermissionsBitField.Flags.ManageMessages],
   callback: async (message, arguments, text, client) => {
     // this just checks if we only get messages from who we want 
     let userFilter = m => m.author.id === message.author.id
     let avatar = message.author.displayAvatarURL()
     message.delete()
     let inputMessage = await message.channel.send(`First, send the id of a user you'd like to log`) 
-
     //collection for messages, we then check it and then continue if it works
     let inputID = await message.channel.awaitMessages({filter: userFilter, max: 1, time: 15000, errors: ['time']}).catch(error => {
         message.channel.send('Timeout due to inactivity').then(msg => {
@@ -86,7 +85,7 @@ module.exports = {
 
     //stylish embed 
     let date = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }).replace(/T/, ' ').replace(/\..+/, '')
-    let embed = new Discord.MessageEmbed()
+    let embed = new Discord.EmbedBuilder()
     .setColor('#3371ff')
     .setTitle(`${userCheck.tag} is on the watchlist.`)
     .setDescription(`**User**: ${userCheck} (${userCheck.id}) \n **Action**: ${offenseReason} \n **Reason**: ${reasonText}`)

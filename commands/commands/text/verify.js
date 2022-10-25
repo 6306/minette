@@ -12,18 +12,18 @@ module.exports = {
     if(verifyNotice) {
     let nChannel = client.channels.cache.get(`${verifyNoticeChannel}`)
     if(!nChannel) return console.log('Notification channel not provided in config, or is just not valid')
-    nChannel.send(`${message.member} (${message.member.id}) passed verification!`)
+    nChannel.send(`${message.member} (${message.member.id}) passed the stupid test!`)
     }
     if(verifyWelcome) {
       let wChannel = client.channels.cache.get(`${verifyWelcomeChannel}`)
       if(!wChannel) return console.log('Welcome channel not provided in config, or is just not valid')
       let date = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }).replace(/T/, ' ').replace(/\..+/, '')
-      let embed = new Discord.MessageEmbed()
+      let embed = new Discord.EmbedBuilder()
       .setColor('#2F3136')
-      .setTitle(`Someone has joined!`)
+      .setTitle(`Someone has entered the building`)
       .setDescription(`Welcome to ${serverName}, ${message.member.user.tag}! \n *Be sure to read <#${verifyInfo}> for rules and other information.*`)
       .setThumbnail(`${verifyPicture}`)
-      .setFooter(`Clocked in at ${date} ET`)
+      .setFooter({text: `Clocked in at ${date} ET`})
       wChannel.send({content: `${message.member}`, embeds: [embed]})
     }
   },

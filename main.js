@@ -3,7 +3,7 @@ const config = require('./config/config.json')
 const loadCommands = require('./commands/core/load-commands.js')
 const commandBase = require('./commands/core/command-base.js')
 const loadUtils = require(`./utils/load-utils.js`)
-const client = new Discord.Client({intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_MEMBERS', 'GUILD_MESSAGE_REACTIONS'], ws: { properties: { $browser: "Discord iOS" }}})
+const client = new Discord.Client({intents: [Discord.GatewayIntentBits.Guilds, Discord.GatewayIntentBits.GuildMessages, Discord.GatewayIntentBits.MessageContent, Discord.GatewayIntentBits.GuildMembers, Discord.GatewayIntentBits.GuildMessageReactions], partials: [Discord.Partials.Message, Discord.Partials.Reaction], ws: { properties: { browser: "Discord iOS" }}})
 
 client.on("ready", () => {
     loadCommands(client)
@@ -18,11 +18,17 @@ client.on("ready", () => {
     if(config.usernameLogging) console.log(`Username Logging: Enabled`)
     if(config.dbConnection) { console.log(`MongoDB Link: Enabled`) } else { console.log(`MongoDB Link: Disabled. Some commands may not work or be limited in function.`)}
     console.log('Minette ready!')
+    client.user.setPresence({
+        status: 'online',
+        activities: [{
+        name: '👀',
+        type: 3,
+     }]})
 })
 
 process.on('unhandledRejection', error => {
     if(error.code !== 50013) {
-         console.error('Something Happened! ', error)
+        console.error('Something Happened! ', error)
     }
     return
 })

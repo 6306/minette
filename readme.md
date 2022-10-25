@@ -1,3 +1,5 @@
+<img align="left" width="80" height="80" src="https://cdn.discordapp.com/attachments/884130874738745454/929162527940681738/image01.jpg" alt="Bot icon">
+
 # Minette
 A discord.js bot base thing, it works i suppose?
 
@@ -7,7 +9,7 @@ A discord.js bot base thing, it works i suppose?
 * **Verify**: verify server members by a command, requires *verifyChannel* and *verifyRole* to work
 * **Response Module**: turned off by default, make it go scream at people if someone says a thing.
 * **game**: remake of "its okay i guess" to fit with discord, now with messages
-* **blackjack**: its blackjack.
+* **blackjack**: its blackjack. (broken)
 
 **Requires Manage Messages**
 * **RecordBan, RecordMute, Note, RecordWatchlist**: requires *Manage Messages* role applied to user to work, might hiccup if also not given *Manage Messages* to the bot as it uses it to clean up afterwards. Can be used to record moderation actions.  
@@ -38,16 +40,16 @@ A discord.js bot base thing, it works i suppose?
     "verifyInfo": "123456789123456789", 
     "cleanupVerify": false,
     "serverName": "SERVER NAME",
-    "infoChannel": "123456789123456789",
-    "manualChannel": "123456789123456789",
+    "embedChannels": ["123456789123456789"],
     "itsOkayChannel": ["123456789123456789"],
     "itsNotOkayUserID": ["123456789123456789"],
     "botChannel": "123456789123456789",
     "autoDm": false,
     "loggingChannel": "123456789123456789",
     "usernameLogging": false,
+    "messageLogging": false,
     "dbConnection": false,
-    "dbLink": "something something mongodb link here"
+    "dbLink": "DATABASE LINK GOES HERE"
 }
 ```
 * **Token**: Your bot token, can be accessed at [here](https://discord.com/developers/applications)
@@ -66,14 +68,14 @@ A discord.js bot base thing, it works i suppose?
 * **verifyInfo**: info channel to send people there
 * **cleanupVerify**: clean up the verify channel every 30 minutes
 * **serverName**: your server name! used for the welcome message
-* **infoChannel**: used for embedinfo, just to not send it accidentally
-* **manualChannel**: same deal but with embedmanual
+* **embedChannels**: the dedicated embed channels you want to update
 * **itsOkayChannel**: channels to use for the "its okay" game
 * **itsNotOkayUserID**: stupid naming joke, stop someones messages showing up from the "its okay" game
 * **botChannel**: lock special commands to the bot channel (game)
 * **autoDm**: auto dms users to notice the verification
 * **loggingChannel**: channel to log things in (user changes and things of that kind)
 * **usernameLogging**: toggle to log usernames
+* **messageLogging**: toggle for logging deleted messages
 * **dbConnection**: Toggle connection to a database, *some commands may not function without one*
 * **dbLink**: Link to your MongoDB database
 
@@ -81,7 +83,7 @@ its possible to rename *verify* to whatever you want if you wish, located at *./
 
 # Embeds
 
-Info and Manual embeds run on two systems
+Embeds run on one template.
 
 **Info Embed**
 ```json
@@ -101,15 +103,15 @@ Info and Manual embeds run on two systems
 
 
 ## Adding Embeds
-Adding embeds is actually pretty easy now!
-
-Add an embed using the proper documentation above this. Then delete everything in your embed channel. Finally run the embed command to create the new embeds.
+1. Create a folder in *./config/embeds* with the channel id of the channel you'd like to use
+2. Create embeds using the template above or provided
+3. Use embedupdate, thats it.
 
 
 
 # Running
 
-To run locally, you'll need [node.js](https://nodejs.org/en/) **v16** and *discord.js + mongoose* installed
+To run locally, you'll need [Node.js](https://nodejs.org/en/) **v16** and *Discord.js* installed and optionally a [MongoDB](https://www.mongodb.com/) database (free tier works)
 
 To install all requirements run in cmd in your project folder
 ```cmd

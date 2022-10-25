@@ -5,9 +5,9 @@ const { prefix, serverName, commandErrors, reply, verifyNotice, verifyWelcome, c
 module.exports = {
     commands: 'help',
     description: 'Lists out all commands + extra stats',
-    permissions: ['MANAGE_MESSAGES'],
+    permissions: [Discord.PermissionsBitField.Flags.ManageMessages],
     callback: (message, arguments, text, client) => {
-       let embed = new Discord.MessageEmbed()
+       let embed = new Discord.EmbedBuilder()
        const commands = loadCommands()
        let messageReply = ''
 

@@ -8,8 +8,8 @@ module.exports = (client) => {
         const { content } = message
         const arguments = content.split(/[ ]+/)
         const text = arguments.join(" ").toLowerCase()
-        if(text.match(/dumb test message here/))
-            message.channel.send('dumb response message here')
+        if(text.match(/match text/))
+            message.channel.send('response')
         }
     )
 }

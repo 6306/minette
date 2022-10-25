@@ -7,7 +7,7 @@ module.exports = {
   commands: 'recordmute' ,
   description: 'Records Mutes',
   requiredRoles: [ ],
-  permissions: ['MANAGE_MESSAGES'],
+  permissions: [Discord.PermissionsBitField.Flags.ManageMessages],
   callback: async (message, arguments, text, client) => {
     // this just checks if we only get messages from who we want 
     let userFilter = m => m.author.id === message.author.id
@@ -88,7 +88,7 @@ module.exports = {
 
     //stylish embed 
     let date = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }).replace(/T/, ' ').replace(/\..+/, '')
-    let embed = new Discord.MessageEmbed()
+    let embed = new Discord.EmbedBuilder()
     .setColor('#ffc133')
     .setTitle(`${userCheck.tag} has been muted.`)
     .setDescription(`**User**: ${userCheck} (${userCheck.id}) \n **Time**: ${timeoutReason} \n **Offense**: ${offenseReason} \n **Reason**: ${reasonText}`)

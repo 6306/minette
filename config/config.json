@@ -15,14 +15,14 @@
     "verifyInfo": "123456789123456789", 
     "cleanupVerify": false,
     "serverName": "SERVER NAME",
-    "infoChannel": "123456789123456789",
-    "manualChannel": "123456789123456789",
+    "embedChannels": ["123456789123456789"],
     "itsOkayChannel": ["123456789123456789"],
     "itsNotOkayUserID": ["123456789123456789"],
     "botChannel": "123456789123456789",
     "autoDm": false,
     "loggingChannel": "123456789123456789",
     "usernameLogging": false,
+    "messageLogging": false,
     "dbConnection": false,
     "dbLink": "DATABASE LINK GOES HERE"
 }     

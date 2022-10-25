@@ -6,7 +6,7 @@ const { prefix, serverName, dbConnection } = module.require(`../../../config/con
 module.exports = {
   commands: 'strike' ,
   description: 'Records strikes',
-  permissions: ['MANAGE_MESSAGES'],
+  permissions: [Discord.PermissionsBitField.Flags.ManageMessages],
   callback: async (message, arguments, text, client) => {
     if(!dbConnection) return message.channel.send(`This command requires MongoDB to be enabled.`)
     if(arguments.length === 0) return message.channel.send(`Invalid amount of arguments given. Proper usage: \`${prefix}strike ADD [USERID] | SUBTRACT [USERID] | REMOVE [USERID] | LIST\``)
@@ -25,7 +25,7 @@ module.exports = {
     }
     switch (strikeChoice){
         case 'list': {
-            let embed = new Discord.MessageEmbed()
+            let embed = new Discord.EmbedBuilder()
             .setTitle(`${serverName}'s Strike list`)
             .setColor(`#ffffff`)
             let strikeList = await strikeSchema.find({})
@@ -54,7 +54,7 @@ module.exports = {
               userCount = userCount + 1
             }
             embed.setDescription(`${userList}`)
-            embed.setFooter(`Current Users: ${userCount}`)
+            embed.setFooter({text: `Current Users: ${userCount}`})
             message.channel.send({embeds : [embed]})
             return
         }
