@@ -1,4 +1,4 @@
-<img align="left" width="80" height="80" src="https://cdn.discordapp.com/attachments/884130874738745454/929162527940681738/image01.jpg" alt="Bot icon">
+<img align="left" width="80" height="80" src="https://files.catbox.moe/rey523.png" alt="Bot icon">
 
 # Minette
 A discord.js bot base thing, it works i suppose?
