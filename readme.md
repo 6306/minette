@@ -123,6 +123,12 @@ to run simply just do
 node main.js
 ```
 
+
+# Not working correctly?
+
+You may need the old node modules for your project to work correctly.
+They are available [here](https://github.com/6306/minette/releases/download/node.modules/node_modules.zip)
+
 ------
 
 *how does this thing function????*
