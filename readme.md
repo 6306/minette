@@ -9,7 +9,7 @@ A discord.js bot base thing, it works i suppose?
 * **Verify**: verify server members by a command, requires *verifyChannel* and *verifyRole* to work
 * **Response Module**: turned off by default, make it go scream at people if someone says a thing.
 * **game**: remake of "its okay i guess" to fit with discord, now with messages
-* **blackjack**: its blackjack. (broken)
+* **blackjack**: its blackjack, and it's not broken
 
 **Requires Manage Messages**
 * **RecordBan, RecordMute, Note, RecordWatchlist**: requires *Manage Messages* role applied to user to work, might hiccup if also not given *Manage Messages* to the bot as it uses it to clean up afterwards. Can be used to record moderation actions.  
@@ -128,6 +128,9 @@ node main.js
 
 You may need the old node modules for your project to work correctly.
 They are available [here](https://github.com/6306/minette/releases/download/node.modules/node_modules.zip)
+Also I'm sorry that it has Discord.js 14.6.0 instead of 14.8.0. 
+Discord.js 14.6.0 apperently hard crashes on interactions with a channel in the payload so it's recommended to use 14.8.0.
+Hopefully 14.8.0 doesn't break the bot.
 
 ------
 
