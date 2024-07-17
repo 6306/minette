@@ -7,7 +7,7 @@ module.exports = {
   callback: async (message, arguments, text) => {
 
     // Check if the message is sent in the correct channel and the user has permission
-    if (!message.member.permissions.has("MANAGE_MESSAGES")) {
+    if (!message.member.permissions.has("0x0000000000000400")) { //0x0000000000000400 is VIEW_CHANNEL according to https://discord.com/developers/docs/topics/permissions#permissions-bitwise-permission-flags. I just used the value and it works so everyone should be able to gamble away in Blackjack.
       if (message.channel.id !== botChannel) return;
     }
 
