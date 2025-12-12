@@ -124,13 +124,12 @@ node main.js
 ```
 
 
-# Not working correctly?
+# Something happened... What though?
 
-You may need the old node modules for your project to work correctly.
-They are available [here](https://github.com/6306/minette/releases/download/node.modules/node_modules.zip)
-Also I'm sorry that it has Discord.js 14.6.0 instead of 14.8.0. 
-Discord.js 14.6.0 apperently hard crashes on interactions with a channel in the payload so it's recommended to use 14.8.0.
-Hopefully 14.8.0 doesn't break the bot.
+Surprise! This code is being updated again as I figured out why commands with embedded buttons doesn't work, it's InteractionCreate.js's fault!
+Then I decided to upload all the node modules to the code so all you need is one click to download **everything**!
+
+It's recommended to use the node modules that are included with minette as it contains some patches to make functions work again.
 
 ------
 
